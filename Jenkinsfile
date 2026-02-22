@@ -2,28 +2,23 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/yourusername/event-registration-devops.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
+                echo 'Building Docker image...'
                 sh 'docker build -t event-registration-app .'
             }
         }
 
         stage('Run Container') {
             steps {
+                echo 'Running Docker container...'
                 sh 'docker run -d -p 5000:5000 event-registration-app'
             }
         }
 
         stage('Test Application') {
             steps {
-                sh 'echo "Application Deployed Successfully"'
+                echo 'Application deployed successfully!'
             }
         }
     }
